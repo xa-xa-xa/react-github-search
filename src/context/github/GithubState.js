@@ -24,6 +24,20 @@ const GithubState = props => {
    */
 
   /**
+   * * Search GitHub Users
+   * @param text - user input
+   *
+   */
+  const searchUsers = async text => {
+    setLoading();
+
+    const res = await axios.get(
+      `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    );
+    dispatch({ type: SEARCH_USERS, payload: res.data.items });
+  };
+
+  /**
    * * Get Users
    */
 
@@ -38,6 +52,9 @@ const GithubState = props => {
   /**
    * * Show loading
    */
+  const setLoading = () => {
+    dispatch({ type: SHOW_LOADING });
+  };
 
   return (
     <GithubContext.Provider
@@ -45,7 +62,8 @@ const GithubState = props => {
         users: state.users,
         user: state.loading,
         repos: state.repos,
-        loading: state.loading
+        loading: state.loading,
+        searchUsers
       }}>
       {props.children}
     </GithubContext.Provider>
