@@ -15,28 +15,9 @@ import GithubState from './context/github/GithubState';
 import './App.css';
 
 const App = () => {
-  const [users, setUsers] = useState([]);
-  const [user, setUser] = useState({});
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
-
-  /**
-   * * Get GitHub User Data
-   * @param login  - GitHub username
-   */
-  const getUser = async login => {
-    setLoading(true);
-
-    const res = await axios
-      .get(
-        `https://api.github.com/users/${login}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-      )
-      .catch(e => console.error(e.message));
-
-    setUser(res.data);
-    setLoading(false);
-  };
 
   /**
    * * Get Users Repos
@@ -50,15 +31,6 @@ const App = () => {
       .catch(e => console.error(e.message));
 
     setRepos(res.data);
-    setLoading(false);
-  };
-
-  /**
-   * * Utility Functions
-   */
-
-  const clearUsers = () => {
-    setUser([]);
     setLoading(false);
   };
 
@@ -82,26 +54,15 @@ const App = () => {
                 path='/'
                 render={props => (
                   <Fragment>
-                    <Search
-                      clearUsers={clearUsers}
-                      showClear={users.length ? true : false}
-                      showAlert={showAlert}
-                    />
-                    <Users loading={loading} users={users} />
+                    <Search showAlert={showAlert} />
+                    <Users />
                   </Fragment>
                 )}></Route>
               <Route exact path='/about' component={About} />
               <Route
                 path='/user/:login'
                 render={props => (
-                  <User
-                    {...props}
-                    getUser={getUser}
-                    getUserRepos={getUserRepos}
-                    user={user}
-                    repos={repos}
-                    loading={loading}
-                  />
+                  <User {...props} getUserRepos={getUserRepos} repos={repos} />
                 )}
               />
             </Switch>
