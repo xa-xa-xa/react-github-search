@@ -2,17 +2,21 @@ import React, { Component, Fragment } from 'react';
 import spinner from '../../resources/spinner.gif';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
+import Repos from '../repos/Repos';
 export class User extends Component {
   componentDidMount() {
     this.props.getUser(this.props.match.params.login);
+    this.props.getUserRepos(this.props.match.params.login);
   }
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     user: PropTypes.object.isRequired,
-    getUser: PropTypes.func.isRequired
+    getUser: PropTypes.func.isRequired,
+    getUserRepos: PropTypes.func.isRequired,
+    repos: PropTypes.array.isRequired
   };
   render() {
+    // User Props
     const {
       name,
       avatar_url,
@@ -28,7 +32,7 @@ export class User extends Component {
       public_gists,
       company
     } = this.props.user;
-    const { loading } = this.props.user;
+    const { loading, repos } = this.props;
 
     if (loading) return spinner;
     return (
@@ -92,6 +96,7 @@ export class User extends Component {
           <div className='badge badge-danger'>Public Repos: {public_repos}</div>
           <div className='badge badge-light'>Public Gists: {public_gists}</div>
         </div>
+        <Repos repos={repos} />
       </Fragment>
     );
   }

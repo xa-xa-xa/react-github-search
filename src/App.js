@@ -16,12 +16,15 @@ class App extends Component {
   state = {
     users: [],
     user: {},
+    repos: [],
     loading: false,
     alert: null
   };
 
-  /*
-   * Search GitHub Users
+  /**
+   * * Search GitHub Users
+   * @param text - user input
+   *
    */
   searchUsers = async text => {
     this.setState({ loading: true });
@@ -32,8 +35,9 @@ class App extends Component {
     this.setState({ users: res.data.items, loading: false });
   };
 
-  /*
-   * Get GitHub User Data
+  /**
+   * * Get GitHub User Data
+   * @param login  - GitHub username
    */
   getUser = async login => {
     this.setState({ loading: true });
@@ -46,6 +50,24 @@ class App extends Component {
     this.setState({ user: res.data, loading: false });
   };
 
+  /**
+   * * Get Users Repos
+   */
+  getUserRepos = async login => {
+    this.setState({ loading: true });
+
+    const res = await axios
+      .get(
+        `https://api.github.com/users/${login}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      )
+      .catch(e => console.error(e.message));
+    this.setState({ repos: res.data, loading: false });
+  };
+
+  /**
+   * * Utility Functions
+   */
+
   clearUsers = () => this.setState({ users: [], loading: false });
   setAlert = (msg, type) => {
     this.setState({
@@ -54,6 +76,7 @@ class App extends Component {
         type: type
       }
     });
+
     // Closing Alert message after 10 seconds
     setTimeout(() => {
       this.setState({ alert: null });
@@ -61,7 +84,7 @@ class App extends Component {
   };
 
   render() {
-    const { users, loading, user } = this.state;
+    const { users, loading, user, repos } = this.state;
     console.log('user render:', user);
     return (
       <Router>
@@ -88,7 +111,13 @@ class App extends Component {
               <Route
                 path='/user/:login'
                 render={props => (
-                  <User {...props} getUser={this.getUser} user={user} />
+                  <User
+                    {...props}
+                    getUser={this.getUser}
+                    getUserRepos={this.getUserRepos}
+                    user={user}
+                    repos={repos}
+                  />
                 )}
               />
             </Switch>
