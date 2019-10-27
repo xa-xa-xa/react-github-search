@@ -1,6 +1,20 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# GitHub User Search (React-Hooks no Redux)
 
-## Available Scripts
+Simple React Application with React Hooks (No Redux) - you can search github users and look their details...
+
+### Live Demo
+
+(https://githubsearchreacthookscontext.netlify.com)
+
+## To run locally, you will need:
+
+### GitHub API:
+
+(https://developer.github.com/v3/)
+
+### React
+
+(https://reactjs.org/)
 
 In the project directory, you can run:
 
