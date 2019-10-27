@@ -81,10 +81,15 @@ export class User extends Component {
               </li>
               <li>
                 {login && (
-                  <Fragment>
+                  <div>
                     <strong>Website: </strong>
-                    {blog}
-                  </Fragment>
+                    <a
+                      href={'https://' + blog}
+                      target='_blank'
+                      rel='noopener noreferrer'>
+                      {blog}
+                    </a>
+                  </div>
                 )}
               </li>
             </ul>
