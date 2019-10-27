@@ -38,7 +38,7 @@ export class User extends Component {
     return (
       <Fragment>
         <Link to='/' className='btn btn-light'>
-          <icon className='fa fa-arrow-alt-circle-left'> Back to search</icon>
+          <i className='fa fa-arrow-alt-circle-left'> Back to search</i>
         </Link>
         Hireable:{' '}
         {hireable ? (
