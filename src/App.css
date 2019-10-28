@@ -5,6 +5,7 @@
   --primary-color: #d35833;
   --dark-color: #3d0d37;
   --light-color: #ede4e4;
+  --lightest-color: #f4f4f4;
   --danger-color: #f25c5f;
   --success-color: #88b21e;
 }
@@ -217,7 +218,7 @@ img {
 
 .btn {
   display: inline-block;
-  background: var(--light-color);
+  background: var(--lightest-color);
   color: #333;
   padding: 0.4rem 1.3rem;
   font-size: 1rem;
@@ -260,7 +261,7 @@ img {
   padding: 0.7rem;
   margin: 1rem 0;
   opacity: 0.9;
-  background: var(--light-color);
+  background: var(--lightest-color);
   color: #333;
 }
 
