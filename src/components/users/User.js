@@ -81,10 +81,7 @@ const User = ({ match }) => {
               {login && (
                 <div>
                   <strong>Website: </strong>
-                  <a
-                    href={'https://' + blog}
-                    target='_blank'
-                    rel='noopener noreferrer'>
+                  <a href={blog} target='_blank' rel='noopener noreferrer'>
                     {blog}
                   </a>
                 </div>

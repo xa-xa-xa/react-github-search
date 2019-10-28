@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const UserItem = ({ user: { login, avatar_url, html_url } }) => {
   return (
-    <div className='card text-center'>
+    <div className='card rounded text-center shadow'>
       <img
         src={avatar_url}
         alt='avatar logo'
@@ -15,7 +15,7 @@ const UserItem = ({ user: { login, avatar_url, html_url } }) => {
       <h3>{login}</h3>
       <Link
         to={`/user/${login}`}
-        className='btn btn-bark btn-sm my-1'
+        className='btn btn-bark btn-sm my-1 rounded'
         aria-label='more'>
         more
       </Link>

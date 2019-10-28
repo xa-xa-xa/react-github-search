@@ -28,12 +28,13 @@ const Search = ({ showAlert }) => {
           value={text}
           placeholder='Search users...'
           onChange={onChange}
+          className='rounded'
         />
-        <input type='submit' className='btn btn-danger btn-block' />
+        <input type='submit' className='btn btn-danger btn-block rounded' />
       </form>
       {githubContext.users.length > 0 && (
         <button
-          className='btn btn-light btn-block'
+          className='btn btn-light btn-block rounded'
           onClick={githubContext.clearUsers}>
           Clear
         </button>
